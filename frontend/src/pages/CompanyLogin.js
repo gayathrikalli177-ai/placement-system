@@ -22,7 +22,7 @@ function CompanyLogin() {
         try {
 
             const res = await axios.post(
-                "http://localhost:5000/api/companies/login",
+                "https://placement-system-s2xm.onrender.com/api/companies/login",
                 login
             );
 

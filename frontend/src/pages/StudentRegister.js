@@ -26,7 +26,7 @@ function StudentRegister() {
         try {
 
             const res = await axios.post(
-                "http://localhost:5000/api/students/register",
+                "https://placement-system-s2xm.onrender.com/api/students/register",
                 student
             );
 

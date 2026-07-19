@@ -14,7 +14,7 @@ function Jobs() {
         try {
 
             const res = await axios.get(
-                "http://localhost:5000/api/jobs"
+                "https://placement-system-s2xm.onrender.com/api/jobs"
             );
 
             setJobs(res.data);
@@ -38,7 +38,7 @@ function Jobs() {
         try {
 
             const res = await axios.post(
-                "http://localhost:5000/api/jobs/apply",
+                "https://placement-system-s2xm.onrender.com/api/jobs/apply",
                 {
                     student_id: studentId,
                     job_id: jobId

@@ -14,7 +14,7 @@ function ViewApplicants() {
             try {
 
                 const res = await axios.get(
-                    `http://localhost:5000/api/jobs/applicants/${company.company_id}`
+                    `https://placement-system-s2xm.onrender.com/api/jobs/applicants/${company.company_id}`
                 );
 
                 setApplicants(res.data);

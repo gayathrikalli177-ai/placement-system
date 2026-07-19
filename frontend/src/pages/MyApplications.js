@@ -14,7 +14,7 @@ function MyApplications() {
             try {
 
                 const res = await axios.get(
-                    `http://localhost:5000/api/jobs/applications/${student.student_id}`
+                    `https://placement-system-s2xm.onrender.com/api/jobs/applications/${student.student_id}`
                 );
 
                 setApplications(res.data);

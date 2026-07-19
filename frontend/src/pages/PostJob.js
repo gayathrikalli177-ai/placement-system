@@ -24,7 +24,7 @@ function PostJob() {
         try {
 
             const res = await axios.post(
-    "http://localhost:5000/api/jobs/add",
+    "https://placement-system-s2xm.onrender.com/api/jobs/add",
     {
         ...job,
         company_id: company.company_id
