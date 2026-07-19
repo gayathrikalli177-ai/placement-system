@@ -31,7 +31,7 @@ function ViewApplicants() {
             fetchApplicants();
         }
 
-    }, []);
+    }, [company]);
 
     return (
 
