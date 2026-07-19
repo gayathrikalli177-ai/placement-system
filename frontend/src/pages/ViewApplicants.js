@@ -8,26 +8,30 @@ function ViewApplicants() {
     const company = JSON.parse(localStorage.getItem("company"));
 
     useEffect(() => {
-        fetchApplicants();
-    }, []);
 
-    const fetchApplicants = async () => {
+        const fetchApplicants = async () => {
 
-        try {
+            try {
 
-            const res = await axios.get(
-                `http://localhost:5000/api/jobs/applicants/${company.company_id}`
-            );
+                const res = await axios.get(
+                    `http://localhost:5000/api/jobs/applicants/${company.company_id}`
+                );
 
-            setApplicants(res.data);
+                setApplicants(res.data);
 
-        } catch (err) {
+            } catch (err) {
 
-            console.log(err);
+                console.log(err);
 
+            }
+
+        };
+
+        if (company) {
+            fetchApplicants();
         }
 
-    };
+    }, []);
 
     return (
 

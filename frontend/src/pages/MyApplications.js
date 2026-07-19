@@ -9,27 +9,29 @@ function MyApplications() {
 
     useEffect(() => {
 
-        fetchApplications();
+        const fetchApplications = async () => {
 
-    }, []);
+            try {
 
-    const fetchApplications = async () => {
+                const res = await axios.get(
+                    `http://localhost:5000/api/jobs/applications/${student.student_id}`
+                );
 
-        try {
+                setApplications(res.data);
 
-            const res = await axios.get(
-                `http://localhost:5000/api/jobs/applications/${student.student_id}`
-            );
+            } catch (err) {
 
-            setApplications(res.data);
+                console.log(err);
 
-        } catch (err) {
+            }
 
-            console.log(err);
+        };
 
+        if (student) {
+            fetchApplications();
         }
 
-    };
+    }, []);
 
     return (
 

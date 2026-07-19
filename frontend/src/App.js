@@ -12,7 +12,6 @@ import PostJob from "./pages/PostJob";
 import MyApplications from "./pages/MyApplications";
 import ViewApplicants from "./pages/ViewApplicants";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
 import "./App.css";
 
 function App() {
