@@ -1,25 +1,23 @@
 import { Navigate } from "react-router-dom";
+import { getSession } from "../auth/session";
 
 function ProtectedRoute({ children, type }) {
+  if (type === "student") {
+    const student = getSession("student");
+    return student ? children : <Navigate to="/student/login" />;
+  }
 
-    if (type === "student") {
+  if (type === "company") {
+    const company = getSession("company");
+    return company ? children : <Navigate to="/company/login" />;
+  }
 
-        const student = localStorage.getItem("student");
+  if (type === "admin") {
+    const admin = getSession("admin");
+    return admin ? children : <Navigate to="/admin/login" />;
+  }
 
-        return student ? children : <Navigate to="/student/login" />;
-
-    }
-
-    if (type === "company") {
-
-        const company = localStorage.getItem("company");
-
-        return company ? children : <Navigate to="/company/login" />;
-
-    }
-
-    return <Navigate to="/" />;
-
+  return <Navigate to="/" />;
 }
 
 export default ProtectedRoute;

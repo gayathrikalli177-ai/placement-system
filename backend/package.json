@@ -2,19 +2,30 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate:passwords": "node scripts/migrate-passwords.js",
+    "migrate:application-uniqueness": "node scripts/add-application-unique-constraint.js",
+    "migrate:placement-workflow": "node scripts/migrate-placement-workflow.js",
+    "seed:demo-jobs": "node scripts/seed-demo-jobs.js",
+    "seed:demo-jobs": "node scripts/seed-demo-jobs.js",
+    "test": "echo \"No backend tests have been added yet.\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "pg": "^8.22.0"
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "pg": "^8.22.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

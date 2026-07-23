@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/client";
+import { getSession } from "../auth/session";
 
 function ViewApplicants() {
 
     const [applicants, setApplicants] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    const company = JSON.parse(localStorage.getItem("company"));
+    const company = getSession("company");
 
     useEffect(() => {
 
@@ -13,15 +16,15 @@ function ViewApplicants() {
 
             try {
 
-                const res = await axios.get(
-                    `https://placement-system-s2xm.onrender.com/api/jobs/applicants/${company.company_id}`
-                );
+                const res = await api.get("/companies/me/applications");
 
                 setApplicants(res.data);
 
             } catch (err) {
+                setError(err.response?.data?.message || "Unable to load applicants.");
 
-                console.log(err);
+            } finally {
+                setLoading(false);
 
             }
 
@@ -38,6 +41,14 @@ function ViewApplicants() {
         <div className="jobs-container">
 
             <h1>Applicants</h1>
+
+            {loading && <p className="page-message">Loading applicants…</p>}
+
+            {!loading && error && <p className="page-message error-message">{error}</p>}
+
+            {!loading && !error && applicants.length === 0 && (
+                <p className="page-message">No students have applied to your jobs yet.</p>
+            )}
 
             {applicants.map((app) => (
 

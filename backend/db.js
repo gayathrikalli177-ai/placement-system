@@ -1,10 +1,15 @@
 const { Pool } = require("pg");
+require("dotenv").config();
+
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+    throw new Error("DATABASE_URL is required. Add it to backend/.env.");
+}
 
 const pool = new Pool({
-    connectionString: "postgresql://neondb_owner:npg_TNYU4eolg2Cp@ep-quiet-cherry-azs9881y.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require",
-    ssl: {
-        rejectUnauthorized: false
-    }
+    connectionString,
+    ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false
 });
 
 module.exports = pool;
