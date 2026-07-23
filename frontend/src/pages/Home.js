@@ -1,66 +1,11 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import api from "../api/client";
-import { getSession, setSession } from "../auth/session";
+import { Link } from "react-router-dom";
+import { getSession } from "../auth/session";
 import "./Home.css";
 
 function Home() {
   const student = getSession("student");
   const company = getSession("company");
   const admin = getSession("admin");
-  const navigate = useNavigate();
-
-  const [loadingStudent, setLoadingStudent] = useState(false);
-  const [loadingCompany, setLoadingCompany] = useState(false);
-  const [loadingAdmin, setLoadingAdmin] = useState(false);
-
-  const handleDemoStudentLogin = async () => {
-    try {
-      setLoadingStudent(true);
-      const res = await api.post("/auth/students/login", {
-        email: "student@demo.com",
-        password: "password123",
-      });
-      setSession("student", res.data.student, res.data.accessToken);
-      navigate("/jobs");
-    } catch (err) {
-      alert("Unable to login with demo student account.");
-    } finally {
-      setLoadingStudent(false);
-    }
-  };
-
-  const handleDemoCompanyLogin = async () => {
-    try {
-      setLoadingCompany(true);
-      const res = await api.post("/auth/companies/login", {
-        email: "company@demo.com",
-        password: "password123",
-      });
-      setSession("company", res.data.company, res.data.accessToken);
-      navigate("/company/dashboard");
-    } catch (err) {
-      alert("Unable to login with demo company account.");
-    } finally {
-      setLoadingCompany(false);
-    }
-  };
-
-  const handleDemoAdminLogin = async () => {
-    try {
-      setLoadingAdmin(true);
-      const res = await api.post("/auth/admin/login", {
-        email: "Gayathrikalli123@gmail.com",
-        password: "Gayathri@123",
-      });
-      setSession("admin", res.data.admin, res.data.accessToken);
-      navigate("/admin/dashboard");
-    } catch (err) {
-      alert("Unable to login with demo admin account.");
-    } finally {
-      setLoadingAdmin(false);
-    }
-  };
 
   return (
     <div className="home-page-wrapper">
@@ -190,112 +135,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* 🔑 DEMO LOGIN CREDENTIALS BANNER */}
-      {!student && !company && !admin && (
-        <section className="demo-credentials-banner">
-          <div className="demo-banner-wrapper">
-            <div className="demo-banner-title">
-              <span>🔑 DEMO LOGIN CREDENTIALS & ONE-CLICK TEST LOGINS</span>
-              <h3>Instant Portal Access For Reviewers</h3>
-              <p>Test the full application flow immediately using pre-seeded candidate, recruiter, or admin credentials below.</p>
-            </div>
-
-            <div className="demo-credentials-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
-              {/* Student Demo Account */}
-              <div className="demo-card student">
-                <div>
-                  <div className="demo-card-head">
-                    <div className="demo-icon">🎓</div>
-                    <div>
-                      <h4>Student Demo Account</h4>
-                      <p>View jobs, submit resumes & track interview rounds</p>
-                    </div>
-                  </div>
-                  <div className="demo-fields">
-                    <div className="demo-field">
-                      <span>Email Address:</span>
-                      <code>student@demo.com</code>
-                    </div>
-                    <div className="demo-field">
-                      <span>Password:</span>
-                      <code>password123</code>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  className="demo-quick-login-btn student"
-                  onClick={handleDemoStudentLogin}
-                  disabled={loadingStudent}
-                >
-                  {loadingStudent ? "Logging in..." : "⚡ 1-Click Student Login →"}
-                </button>
-              </div>
-
-              {/* Recruiter Demo Account */}
-              <div className="demo-card company">
-                <div>
-                  <div className="demo-card-head">
-                    <div className="demo-icon">🏢</div>
-                    <div>
-                      <h4>Recruiter Demo Account</h4>
-                      <p>Post job openings, manage rounds & evaluate applicants</p>
-                    </div>
-                  </div>
-                  <div className="demo-fields">
-                    <div className="demo-field">
-                      <span>Email Address:</span>
-                      <code>company@demo.com</code>
-                    </div>
-                    <div className="demo-field">
-                      <span>Password:</span>
-                      <code>password123</code>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  className="demo-quick-login-btn company"
-                  onClick={handleDemoCompanyLogin}
-                  disabled={loadingCompany}
-                >
-                  {loadingCompany ? "Logging in..." : "⚡ 1-Click Recruiter Login →"}
-                </button>
-              </div>
-
-              {/* Super Admin Demo Account */}
-              <div className="demo-card company" style={{ borderLeftColor: "#e11d48" }}>
-                <div>
-                  <div className="demo-card-head">
-                    <div className="demo-icon" style={{ background: "rgba(225, 29, 72, 0.2)", color: "#fb7185" }}>👑</div>
-                    <div>
-                      <h4>Super Admin Account</h4>
-                      <p>Full control over Students, Companies, Jobs & Applications</p>
-                    </div>
-                  </div>
-                  <div className="demo-fields">
-                    <div className="demo-field">
-                      <span>Email Address:</span>
-                      <code>Gayathrikalli123@gmail.com</code>
-                    </div>
-                    <div className="demo-field">
-                      <span>Password:</span>
-                      <code>Gayathri@123</code>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  className="demo-quick-login-btn company"
-                  style={{ background: "linear-gradient(135deg, #e11d48, #be123c)" }}
-                  onClick={handleDemoAdminLogin}
-                  disabled={loadingAdmin}
-                >
-                  {loadingAdmin ? "Authenticating..." : "⚡ 1-Click Super Admin Login →"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Impact Stats Banner */}
       <section className="impact-stats-section">
