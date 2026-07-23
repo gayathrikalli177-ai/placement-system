@@ -38,7 +38,8 @@ function StudentRegister() {
         navigate("/student/login");
       }, 1500);
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed. Please check your inputs.");
+      const msg = err.response?.data?.errors?.[0]?.message || err.response?.data?.message || "Registration failed. Please check your inputs.";
+      setError(msg);
     } finally {
       setLoading(false);
     }

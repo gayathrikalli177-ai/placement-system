@@ -32,7 +32,7 @@ function validateParams(schema) {
 }
 
 const email = z.string().trim().toLowerCase().email().max(100);
-const password = z.string().min(12, "Password must be at least 12 characters").max(64);
+const password = z.string().min(6, "Password must be at least 6 characters").max(64);
 const phone = z.string().trim().regex(/^\+?[0-9]{7,15}$/, "Enter a valid phone number");
 const date = z.string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD for the deadline")

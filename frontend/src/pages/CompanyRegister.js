@@ -36,7 +36,8 @@ function CompanyRegister() {
         navigate("/company/login");
       }, 1500);
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed. Please check your details.");
+      const msg = err.response?.data?.errors?.[0]?.message || err.response?.data?.message || "Registration failed. Please check your details.";
+      setError(msg);
     } finally {
       setLoading(false);
     }
